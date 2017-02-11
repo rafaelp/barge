@@ -38,6 +38,14 @@ module Barge
       def destroy_record(volume_id, record_id)
         delete("volumes/#{volume_id}/records/#{record_id}")
       end
+
+      def create_snapshot(volume_id, options)
+        post("volumes/#{volume_id}/snapshots", options.to_json)
+      end
+
+      def list_snapshots(volume_id)
+        get("volumes/#{volume_id}/snapshots")
+      end
     end
   end
 end

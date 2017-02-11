@@ -60,4 +60,14 @@ describe Barge::Resource::Volume do
     end
   end
 
+  describe '#create_snapshot' do
+    it 'returns information about a given volume' do
+      stubbed_request =
+        stub_request!(:get, '/volumes/7724db7c-e098-11e5-b522-000f53304e51/snapshots')
+        .to_return(body: fixture('volumes/list_snapshots'), status: 200)
+      expect(volume.list_snapshots('7724db7c-e098-11e5-b522-000f53304e51').meta.total).to eq 1
+      expect(stubbed_request).to have_been_requested
+    end
+  end
+
 end
